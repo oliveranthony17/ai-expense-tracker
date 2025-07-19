@@ -21,7 +21,18 @@ class ExpenseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'amount' => ['required', 'numeric', 'min:0'],
+            'title' => ['required', 'string', 'max:255'],
+            'date' => ['required', 'date'],
+            'description' => ['nullable', 'string'],
+            'category' => ['nullable', 'string'],
+        ]);
+
+
+        $expense = Expense::create($validated);
+
+        return response()->json($expense, 201);
     }
 
     /**
