@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# Start Laravel API
+php artisan serve --host=127.0.0.1 --port=8000 &
+
+# Start React frontend
+cd javascript && npm run dev
+
+# Optional: kill background Laravel server when script exits
+trap "kill $!" EXIT
