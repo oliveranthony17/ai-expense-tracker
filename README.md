@@ -1,3 +1,13 @@
+## AI Expenses Tracker
+
+The idea of this app is to be able to feed your bank / credit card statement to the application, use AI to categorize the payment based on the description, and then be able to track these expenses with useful charts and graphs.
+
+You should also be able to manually overwrite the category of the expenses, and add your own categories that will then be considered in the future. i.e. we tell the AI model that we have `[x, y, z]` categories available, please try to use these first, otherwise create an additional category.
+
+The API will be built using Laravel, and the frontend will be React. I also plan to use Ionic for a potential future mobile version.
+
+---
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
