@@ -123,4 +123,6 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    /* This is used to authenticate the React app with the Laravel API. */
+    'api_key' => env('API_KEY'),
 ];

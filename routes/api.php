@@ -10,4 +10,6 @@ Route::get('/ping', function () {
     );
 });
 
-Route::apiResource('expenses', ExpenseController::class);
+Route::middleware('api.key')->group(function () {
+    Route::apiResource('expenses', ExpenseController::class);
+});

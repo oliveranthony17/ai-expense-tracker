@@ -7,21 +7,38 @@ use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
 
 use App\Models\Expense;
-use function PHPUnit\Framework\assertJson;
 
 class ExpenseTest extends TestCase
 {
     use RefreshDatabase;
+
+    private string $apiKey;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->apiKey = config('app.api_key');
+    }
 
     #[Test]
     public function it_returns_a_list_of_expenses(): void
     {
         Expense::factory()->count(5)->create();
 
-        $response = $this->getJson('/api/expenses');
+        $response = $this->getJson('/api/expenses', [
+            'X-API-Key' => $this->apiKey,
+        ]);
 
         $response->assertStatus(200)
             ->assertJsonCount(5);
+    }
+
+    #[Test]
+    public function it_rejects_list_without_api_key(): void
+    {
+        $response = $this->getJson('/api/expenses');
+
+        $response->assertStatus(401);
     }
 
     #[Test]
@@ -35,7 +52,9 @@ class ExpenseTest extends TestCase
             'category' => 'Food',
         ];
 
-        $response = $this->postJson('/api/expenses', $payload);
+        $response = $this->postJson('/api/expenses', $payload, [
+            'X-API-Key' => $this->apiKey,
+        ]);
 
         $response->assertStatus(201)
             ->
@@ -54,5 +73,21 @@ class ExpenseTest extends TestCase
             'description' => 'Quick sandwich and drink',
             'category' => 'Food'
         ]);
+    }
+
+    #[Test]
+    public function it_rejects_creation_without_api_key(): void
+    {
+        $payload = [
+            'amount' => 42.50,
+            'title' => 'Lunch at Cafe',
+            'date' => '2025-07-19',
+            'description' => 'Quick sandwich and drink',
+            'category' => 'Food',
+        ];
+
+        $response = $this->postJson('/api/expenses', $payload);
+
+        $response->assertStatus(401);
     }
 }
