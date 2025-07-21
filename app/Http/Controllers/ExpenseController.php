@@ -13,7 +13,7 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        return Expense::all();
+        return Expense::orderByDesc('date')->get();
     }
 
     /**

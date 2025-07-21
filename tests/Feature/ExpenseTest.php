@@ -23,14 +23,15 @@ class ExpenseTest extends TestCase
     #[Test]
     public function it_returns_a_list_of_expenses(): void
     {
-        Expense::factory()->count(5)->create();
+        $expenses = Expense::factory()->count(5)->create();
 
         $response = $this->getJson('/api/expenses', [
             'X-API-Key' => $this->apiKey,
         ]);
 
         $response->assertStatus(200)
-            ->assertJsonCount(5);
+            ->assertJsonCount(5)
+            ->assertJsonPath('0.id', $expenses->sortByDesc('date')->first()->id);
     }
 
     #[Test]
