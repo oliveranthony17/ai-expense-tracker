@@ -40,13 +40,34 @@ export default function ExpenseForm({ onCreated }) {
     }
 
     return (
-        <form onSubmit={handleSubmit} style={{ marginBottom: '2rem' }}>
+        <form onSubmit={handleSubmit} className="expense-form">
             <h2>Create Expense</h2>
-            <input name="title" placeholder="Title" value={formData.title} onChange={handleChange} required />
-            <input name="amount" type="number" step="0.01" placeholder="Amount" value={formData.amount} onChange={handleChange} required />
-            <input name="date" type="date" value={formData.date} onChange={handleChange} required />
-            <input name="category" placeholder="Category" value={formData.category} onChange={handleChange} />
-            <input name="description" placeholder="Description" value={formData.description} onChange={handleChange} />
+
+            <label>
+                Title*
+                <input name="title" value={formData.title} onChange={handleChange} required />
+            </label>
+
+            <label>
+                Amount (CHF)*
+                <input name="amount" type="number" step="0.01" value={formData.amount} onChange={handleChange} required />
+            </label>
+
+            <label>
+                Date*
+                <input name="date" type="date" value={formData.date} onChange={handleChange} required />
+            </label>
+
+            <label>
+                Category
+                <input name="category" value={formData.category} onChange={handleChange} />
+            </label>
+
+            <label>
+                Description
+                <input name="description" value={formData.description} onChange={handleChange} />
+            </label>
+
             <button type="submit">Add Expense</button>
         </form>
     );

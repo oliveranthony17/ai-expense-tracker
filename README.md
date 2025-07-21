@@ -10,7 +10,7 @@ The API will be built using Laravel, and the frontend will be React. I also plan
 
 - Work through TODOs...
 - Add favicon
-- Improve form
+- ~~Improve form~~
 - Navbar
 - General styling
 - AI category generator
