@@ -1,0 +1,36 @@
+body {
+    font-family: sans-serif;
+    background-color: #f6f8fa;
+    margin: 0;
+    padding: 10px;
+    line-height: 1.6;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.expense-list {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 0;
+    list-style: none;
+}
+
+.expense-item {
+    background: white;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.expense-item strong {
+    font-size: 1.2rem;
+}
+
+.expense-item em {
+    color: #666;
+    font-size: 0.9rem;
+}

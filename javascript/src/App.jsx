@@ -1,4 +1,6 @@
 import {useState, useEffect} from 'react'
+import ExpenseList from './components/ExpenseList';
+import ExpenseForm from './components/ExpenseForm';
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 const API_URL = import.meta.env.VITE_API_URL;
@@ -6,37 +8,30 @@ const API_URL = import.meta.env.VITE_API_URL;
 function App() {
     const [expenses, setExpenses] = useState([])
 
-    useEffect(
-        () => {
-            fetch(API_URL, {
-                    headers: {
-                        'X-API-Key': API_KEY
-                    }
-                }
-            )
-                .then(res => res.json())
-                .then(setExpenses)
-                .catch(err => console.error(err))
-        },
+    function loadExpenses() {
+        fetch(API_URL, {
+            headers: {
+                'X-API-Key': API_KEY
+            }
+        })
+            .then(res => res.json())
+            .then(setExpenses)
+            .catch(err => console.error(err));
+    }
 
-        []
-    )
+    useEffect(() => {
+        loadExpenses();
+    }, []);
 
     return (
-        <div style={{padding: '2rem'}}>
+        <div style={{ padding: '2rem' }}>
             <h1>Expenses</h1>
-            <ul>
-                {expenses.map(expense => (
-                    <li key={expense.id}>
-                        <strong>{expense.title}</strong> – £{expense.amount} on {expense.date}
-                        <br/>
-                        <em>{expense.category}</em>
-                        <p>{expense.description}</p>
-                    </li>
-                ))}
-            </ul>
+            <ExpenseForm onCreated={loadExpenses} // TODO: would be nice to only fetch the new expense...
+                         apiKey={API_KEY}
+                         apiUrl={API_URL} />
+            <ExpenseList expenses={expenses} />
         </div>
-    )
+    );
 }
 
 export default App
