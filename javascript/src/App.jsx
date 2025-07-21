@@ -8,6 +8,10 @@ const API_URL = import.meta.env.VITE_API_URL;
 function App() {
     const [expenses, setExpenses] = useState([])
 
+    useEffect(() => {
+        loadExpenses();
+    }, []);
+
     function loadExpenses() {
         fetch(API_URL, {
             headers: {
@@ -19,14 +23,14 @@ function App() {
             .catch(err => console.error(err));
     }
 
-    useEffect(() => {
-        loadExpenses();
-    }, []);
+    function appendExpenseToTop(expense) {
+        setExpenses(prev => [expense, ...prev]);
+    }
 
     return (
         <div style={{ padding: '2rem' }}>
             <h1>Expenses</h1>
-            <ExpenseForm onCreated={loadExpenses} // TODO: would be nice to only fetch the new expense...
+            <ExpenseForm onCreated={appendExpenseToTop}
                          apiKey={API_KEY}
                          apiUrl={API_URL} />
             <ExpenseList expenses={expenses} />
