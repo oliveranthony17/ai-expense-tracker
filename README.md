@@ -6,6 +6,16 @@ You should also be able to manually overwrite the category of the expenses, and 
 
 The API will be built using Laravel, and the frontend will be React. I also plan to use Ionic for a potential future mobile version.
 
+### TODO:
+
+- Work through TODOs...
+- Add favicon
+- Improve form
+- Navbar
+- General styling
+- AI category generator
+- Any way to link to CSV / statement...? Certo CC?
+
 ---
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
